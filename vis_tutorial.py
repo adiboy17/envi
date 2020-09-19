@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # VIS Tutorial 
-
-
-# In[ ]:
-
 
 # Import Libraries 
 from plantcv import plantcv as pcv
@@ -17,7 +12,7 @@ import matplotlib
 
 class options:
     def __init__(self):
-        self.image = "img/tutorial_images/vis/original_image.jpg"
+        self.image = "https://github.com/adiboy17/envi/blob/master/plantimg/coco.jpg"
         self.debug = "plot"
         self.writeimg= False
         self.result = "./vis_tutorial_results"
@@ -80,12 +75,6 @@ s_thresh = pcv.threshold.binary(gray_img=s, threshold=85, max_value=255, object_
 s_mblur = pcv.median_blur(gray_img=s_thresh, ksize=5)
 
 
-# In[ ]:
-
-
-# An alternative to using median_blur is gaussian_blur, which applies 
-# a gaussian blur filter to the image. Depending on the image, one 
-# technique may be more effective than others. 
 
 # Inputs:
 #   img - RGB or grayscale image data
@@ -97,7 +86,6 @@ s_mblur = pcv.median_blur(gray_img=s_thresh, ksize=5)
 gaussian_img = pcv.gaussian_blur(img=s_thresh, ksize=(5, 5), sigma_x=0, sigma_y=None)
 
 
-# Using multiple colorspace channels can lead to better descrimination between plant and the background in an image. 
 
 # In[ ]:
 
@@ -111,13 +99,8 @@ b = pcv.rgb2gray_lab(rgb_img=img, channel='b')
 
 # Threshold the blue channel image 
 b_thresh = pcv.threshold.binary(gray_img=b, threshold=160, max_value=255, 
-                                object_type='light')
 
 
-# In[ ]:
-
-
-# Join the threshold saturation and blue-yellow images with a logical or operation 
 
 # Inputs: 
 #   bin_img1 - Binary image data to be compared to bin_img2
@@ -137,11 +120,6 @@ bs = pcv.logical_or(bin_img1=s_mblur, bin_img2=b_thresh)
 masked = pcv.apply_mask(img=img, mask=bs, mask_color='white')
 
 
-# Now we'll focus on capturing the plant in the masked image. We will use masked green-magenta and blue-yellow channels. 
-# Then two channels are thresholded to caputre different portions of the plant, and thre three images are joined together. 
-# Small objected are filled, and the resulting binary image is used to mask the masked image previously obtained. 
-
-# In[ ]:
 
 
 # Convert RGB to LAB and extract the Green-Magenta and Blue-Yellow channels
@@ -304,7 +282,7 @@ analysis_image = pcv.analyze_object(img=img, obj=obj, mask=mask)
 # In[ ]:
 
 
-# Shape properties relative to user boundary line (optional)
+
 
 # Inputs:
 #   img - RGB or grayscale image data 
@@ -319,7 +297,7 @@ boundary_image2 = pcv.analyze_bound_horizontal(img=img, obj=obj, mask=mask,
 # In[ ]:
 
 
-# Determine color properties: Histograms, Color Slices and Pseudocolored Images, output color analyzed images (optional)
+
 
 # Inputs:
 #   rgb_img - RGB image data
@@ -339,9 +317,7 @@ pcv.print_image(img=color_histogram, filename="vis_tutorial_color_hist.jpg")
 # In[ ]:
 
 
-# Divide plant object into twenty equidistant bins and assign pseudolandmark points based upon their 
-# actual (not scaled) position. Once this data is scaled this approach may provide some information 
-# regarding shape independent of size.
+
 
 # Inputs:
 #   img - RGB or grayscale image data 
@@ -366,15 +342,6 @@ top_y, bottom_y, center_v_y = pcv.y_axis_pseudolandmarks(img=img, obj=obj, mask=
 pcv.print_results(filename='vis_tutorial_results.txt')
 
 
-# To view and/or download the text file output (saved in JSON format)...
-# 1) To see the text file with data that got saved out, click “File” tab in top left corner.
-# 2) Click “Open…”
-# 3) Open the file named “vis_tutorial_results.txt”
-# 
-# Check out documentation on how to [convert JSON](https://plantcv.readthedocs.io/en/latest/tools/#convert-output-json-data-files-to-csv-tables) format output into table formatted output. Depending on the analysis steps a PlantCV user may have two CSV files (single value traits and multivalue traits). 
-# 
-
-# In[ ]:
 
 
 
