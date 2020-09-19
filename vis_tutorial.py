@@ -2,17 +2,7 @@
 # coding: utf-8
 
 # # VIS Tutorial 
-# 
-# When starting an image-based phenotyping project it is important to consider what the end goals of the project are.
-# The goals of the project will determine the the camera type, imaging layout, and will help to 
-# guide downstream analysis. For example, if the goal of the project is to quantify the growth rates of a population of 
-# Arabidopsis plants, you may want to take timelapse images of whole flats of plants with an RGB (VIS) camera.
-# 
-# To run a VIS workflow over a single VIS image there are two required inputs:
-# 
-# 1.  **Image:** Images can be processed regardless of what type of VIS camera was used (high-throughput platform, digital camera, cell phone camera).
-# Image processing will work with adjustments if images are well lit and free of background that is similar in color to plant material.  
-# 2.  **Output directory:** If debug mode is set to 'print' output images from each step are produced.
+
 
 # In[ ]:
 
